@@ -1,0 +1,33 @@
+aid: administration-for-community-living-acl-
+name: Administration for Community Living (ACL)
+description: >-
+  The Administration for Community Living (ACL) supports the needs of the aging
+  and disability populations, and improves access health care and long-term ...
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - API
+created: '2024-11-20'
+modified: '2024-11-20'
+url: >-
+  https://raw.githubusercontent.com/api-search/administration-for-community-living-acl-/refs/heads/main/apis.yml
+specificationVersion: '0.19'
+apis:
+  - aid: >-
+      administration-for-community-living-acl-:administration-for-community-living-acl-
+    name: Administration for Community Living (ACL)
+    description: >-
+      The Administration for Community Living (ACL) supports the needs of the
+      aging and disability populations, and improves access health care and
+      long-term ...
+    humanURL: https://www.usa.gov/agencies/administration-for-community-living
+    tags:
+      - API
+    properties:
+      - type: Documentation
+        url: https://www.usa.gov/agencies/administration-for-community-living
+maintainers:
+  - FN: Kin Lane
+    email: info@apievangelist.com
