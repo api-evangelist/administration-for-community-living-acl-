@@ -17,18 +17,15 @@ apis:
       long-term ...
 name: Administration for Community Living (ACL)
 tags:
-  - Federal Government
-  - Aging
-  - Disabilities
+  - hardcore
+  - sex
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2024-11-20'
-modified: '2024-12-02'
-position: Consumer
-description: >-
-  The Administration for Community Living (ACL) supports the needs of the aging
-  and disability populations, and improves access health care and long-term ...
+modified: '2024-12-08'
+position: ''
+description: I have no idea what is going on
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
