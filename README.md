@@ -5,7 +5,8 @@ The Administration for Community Living (ACL) is part of the United States Depar
 
 ## Scope
 
-- **Type:** Index 
+- **Type:** Contract 
+- **Position:** Consuming 
 - **Access:** 3rd-Party 
 
 ## Tags
@@ -17,22 +18,7 @@ The Administration for Community Living (ACL) is part of the United States Depar
 ## Timestamps
 
 - **Created:** 2024-11-20 
-- **Modified:** 2024-12-11 
-
-## APIs
-
-### Administration for Community Living (ACL)
-The Administration for Community Living (ACL) is part of the United States Department of Health and Human Services. It is headed by the Administrator and Assistant Secretary for Aging, who reports directly to the Secretary of Health and Human Services (HHS). ACL's Principal Deputy Administrator serves as Senior Advisor to the HHS Secretary for Disability Policy.
-
-**Human URL:** [https://www.usa.gov/agencies/administration-for-community-living](https://www.usa.gov/agencies/administration-for-community-living)
-
-#### Tags
-
-- API
-
-#### Properties
-
-- [Documentation](https://www.usa.gov/agencies/administration-for-community-living)
+- **Modified:** 2024-12-21 
 
 ## Maintainers
 
