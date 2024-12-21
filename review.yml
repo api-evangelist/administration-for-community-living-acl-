@@ -1,4 +1,4 @@
-executed: '2024-12-15T23:26:32.378Z'
+executed: '2024-12-21T21:01:15.777Z'
 results:
   - code: apis-json-specification-aid-info
     message: There is an aid.
@@ -86,7 +86,7 @@ results:
         character: 6
       end:
         line: 7
-        character: 11
+        character: 14
   - code: apis-json-image-info
     message: There is an image.
     path:
@@ -187,3 +187,15 @@ results:
       end:
         line: 22
         character: 28
+  - code: apis-json-name-info
+    message: There is a name.
+    path:
+      - name
+    severity: 2
+    range:
+      start:
+        line: 23
+        character: 6
+      end:
+        line: 23
+        character: 47
