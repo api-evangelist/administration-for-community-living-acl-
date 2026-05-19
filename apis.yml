@@ -50,6 +50,8 @@ apis:
       - type: DataAPI
         url: https://agid.acl.gov/DataFiles/
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/aclgov
   - type: Website
     url: https://acl.gov/
   - type: Portal
