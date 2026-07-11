@@ -50,6 +50,8 @@ apis:
       - type: DataAPI
         url: https://agid.acl.gov/DataFiles/
 common:
+  - type: DomainSecurity
+    url: security/administration-for-community-living-acl--domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/aclgov
   - type: Website
