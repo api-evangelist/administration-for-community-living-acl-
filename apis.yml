@@ -108,6 +108,12 @@ apis:
       - Disability
       - Caregiving
       - Service Locator
+      - content-api
+    tags_raw:
+      - Aging
+      - Disability
+      - Caregiving
+      - Service Locator
       - Content API
     properties:
       - type: Documentation
