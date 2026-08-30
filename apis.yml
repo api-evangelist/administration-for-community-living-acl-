@@ -27,7 +27,7 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/administration-for-community-living-acl-/refs/heads/main/apis.yml
 name: Administration for Community Living (ACL)
 created: '2024-11-20'
-modified: '2026-04-19'
+modified: '2026-08-30'
 specificationVersion: '0.23'
 tags:
   - Aging
@@ -70,6 +70,14 @@ apis:
       Developmental Disabilities) Longitudinal Data. Data files are available
       for download in CSV and Excel formats.
     humanURL: https://agid.acl.gov/
+    baseURL: https://sic.acl.gov/p-agid-ui-fn
+    baseURLNote: >-
+      Undocumented. This is the Azure API Management gateway the AGID
+      portal's own front end calls; the base URL and the twelve POST-only
+      operation paths were read from the public bundle
+      https://agid.acl.gov/assets/index-2c03a0f9.js and confirmed live on
+      2026-08-30 (POST /GetDataSets -> 200). ACL publishes no reference for
+      it and no way to obtain the required Ocp-Apim-Subscription-Key.
     tags:
       - Aging
       - Disability
@@ -81,7 +89,58 @@ apis:
         url: https://agid.acl.gov/
       - type: DataAPI
         url: https://agid.acl.gov/DataFiles/
+  - aid: administration-for-community-living-acl-:eldercare-locator-content-api
+    name: Eldercare Locator Content API
+    description: >-
+      The Strapi 5 headless-CMS REST API behind eldercare.acl.gov, the national
+      Eldercare Locator service ACL operates to connect older adults and
+      caregivers to local aging and disability services. The eldercareglobal
+      collection is readable anonymously and returns the standard Strapi 5
+      envelope. ACL publishes no reference for this API; the base URL was read
+      from the public Next.js bundle eldercare.acl.gov serves and confirmed live
+      on 2026-08-30 (GET /api/eldercareglobal -> 200, application/json). Other
+      Strapi collection names probed return 404, so the public role exposes a
+      narrow allowlist rather than the whole content model. Read-only.
+    humanURL: https://eldercare.acl.gov/
+    baseURL: https://ehc.acl.gov/api
+    tags:
+      - Aging
+      - Disability
+      - Caregiving
+      - Service Locator
+      - Content API
+    properties:
+      - type: Documentation
+        url: https://eldercare.acl.gov/
 common:
+  - type: Authentication
+    url: authentication/administration-for-community-living-acl--authentication.yml
+  - type: Conventions
+    url: conventions/administration-for-community-living-acl--conventions.yml
+  - type: ErrorCatalog
+    url: errors/administration-for-community-living-acl--problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/administration-for-community-living-acl--lifecycle.yml
+  - type: ChangeLog
+    url: changelog/administration-for-community-living-acl--changelog.yml
+  - type: Conformance
+    url: conformance/administration-for-community-living-acl--conformance.yml
+  - type: Packages
+    url: packages/administration-for-community-living-acl--packages.yml
+  - type: LLMsTxt
+    url: llms/administration-for-community-living-acl--llms.txt
+  - type: VulnerabilityDisclosure
+    url: security/administration-for-community-living-acl--vulnerability-disclosure.yml
+  - type: Security
+    url: https://www.hhs.gov/vulnerability-disclosure-policy/index.html
+  - type: Support
+    url: https://acl.gov/contact-us
+  - type: Blog
+    url: https://acl.gov/news-and-events/acl-blog
+  - type: PrivacyPolicy
+    url: https://acl.gov/privacy
+  - type: TermsOfService
+    url: https://acl.gov/disclaimer
   - type: DomainSecurity
     url: security/administration-for-community-living-acl--domain-security.yml
   - type: LinkedIn
@@ -160,3 +219,8 @@ maintainers:
   - FN: Kin Lane
     X-twitter: apievangelist
     email: info@apievangelist.com
+x-enrichment:
+  date: '2026-08-30'
+  status: enriched
+  artifacts_added: 11
+  pass: local-v1

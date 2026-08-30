@@ -1,0 +1,108 @@
+specification: API Commons Conformance
+specificationVersion: '0.1'
+provider: Administration for Community Living (ACL)
+providerId: administration-for-community-living-acl-
+generated: '2026-08-30'
+method: probed
+source: >-
+  Derived from the live behaviour of https://sic.acl.gov/p-agid-ui-fn and
+  https://ehc.acl.gov/api and from probes of every ACL host's /.well-known/*
+  paths on 2026-08-30. No conformance or compliance claim is published by ACL for
+  either API.
+description: >-
+  Cross-cutting and domain-standard conformance for ACL's API surfaces. Every
+  entry below is a measured negative: ACL publishes no machine-readable contract,
+  so nothing here could be asserted from a specification, and nothing observed on
+  the wire matched a cross-cutting standard. Recorded so the absence is evidence
+  rather than a gap in our looking.
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No oauth2 flow on either surface. /.well-known/oauth-authorization-server
+      returned 404 on acl.gov and sic.acl.gov. AGID uses an Azure APIM
+      subscription key header; Eldercare content is anonymous.
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration returned 404 on acl.gov and sic.acl.gov.
+  - id: rfc9457
+    conforms: false
+    evidence: >-
+      No application/problem+json response was returned. Observed error bodies
+      were plain-text sentences (400), Azure APIM JSON (401/404), a serialized
+      stack trace (500) and Strapi's own envelope.
+  - id: rfc9116
+    conforms: false
+    evidence: /.well-known/security.txt returned 404 on acl.gov, sic.acl.gov and ehc.acl.gov.
+  - id: rfc8615
+    conforms: false
+    evidence: >-
+      No well-known document served on any of the five ACL hosts probed. See
+      well-known/administration-for-community-living-acl--well-known.yml.
+  - id: rfc8594
+    conforms: false
+    evidence: No Sunset or Deprecation response header observed; no deprecation policy published.
+  - id: pagination
+    conforms: false
+    evidence: >-
+      AGID operations return bare JSON arrays with no cursor, offset or total.
+      Strapi 5 supports native pagination on ehc.acl.gov but ACL documents none of it.
+  - id: idempotency
+    conforms: na
+    evidence: Both surfaces are read-only; there is no write operation an idempotency key could protect.
+  - id: json:api
+    conforms: false
+    evidence: Responses are bare arrays (AGID) or the Strapi 5 envelope (Eldercare); neither is JSON:API.
+  - id: odata
+    conforms: false
+    evidence: No $metadata surface; no OData query options accepted.
+  - id: openapi
+    conforms: false
+    evidence: >-
+      /openapi.json, /swagger.json and /api-docs probed on acl.gov (404),
+      agid.acl.gov (200 HTML shell — miss), sic.acl.gov (404) and ehc.acl.gov
+      (Strapi documentation plugin not enabled, 404).
+domain_standards:
+  sector: US federal government — aging, disability and community living services
+  regime: us-federal-government
+  probed:
+    - id: fhir
+      conforms: false
+      evidence: >-
+        ACL is an HHS operating division but is a grants, programs and statistics
+        agency, not a clinical data holder. No FHIR resource, capability
+        statement or /metadata endpoint exists on any ACL host. AGID publishes
+        aggregate program statistics, which is outside FHIR's scope.
+    - id: oai-pmh
+      conforms: false
+      evidence: >-
+        The AGID data portal is the natural candidate for a harvest protocol
+        (it is a public statistical dataset repository), but no OAI-PMH verb
+        endpoint was found and the twelve backend operations are a bespoke RPC
+        set.
+    - id: dcat-us
+      conforms: false
+      evidence: >-
+        The federal open-data standard for this agency class. No /data.json
+        Project Open Data catalog was found on acl.gov or agid.acl.gov, and
+        acl.gov/.well-known/api-catalog returned 404. This is the single most
+        applicable domain standard for ACL and it is unmet.
+      applicable: true
+    - id: hl7v2
+      conforms: false
+      evidence: Not applicable to an aggregate-statistics publisher; no message surface exists.
+  note: >-
+    REWARD-ONLY. ACL's market does have an applicable standard — DCAT-US /
+    Project Open Data, the federal catalog standard its sibling HHS agencies
+    publish at /data.json — and ACL does not implement it. That is recorded as an
+    unmet applicable standard, not as a penalty.
+certifications:
+  published: []
+  note: >-
+    No trust center and no named certification programme (FedRAMP, SOC 2, ISO
+    27001) is published for the ACL API surfaces. probe-security-programs.py
+    returned vdp=none trust=none on 2026-08-30. No Compliance pointer is emitted.
+maintainers:
+  - FN: Kin Lane
+    X-twitter: apievangelist
+    email: info@apievangelist.com

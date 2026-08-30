@@ -1,0 +1,183 @@
+specification: API Commons Well-Known
+specificationVersion: '0.1'
+provider: Administration for Community Living (ACL)
+providerId: administration-for-community-living-acl-
+generated: '2026-08-30'
+method: probed
+source: live GET probes of /.well-known/* on every acl.gov host named in apis.yml plus the two API hosts discovered in STEP 0b
+description: >-
+  Probe record for RFC 8615 well-known documents across every ACL host in this
+  profile. No host served a well-known document. Two ACL properties
+  (agid.acl.gov, eldercare.acl.gov) are single-page applications whose catch-all
+  route answers HTTP 200 with the application HTML shell for EVERY /.well-known/*
+  path — those 200s are recorded here as misses, not hits, because the body is an
+  HTML shell and not a document. No WellKnown, SecurityTxt or APICatalog pointer is
+  emitted from this file: the probe records an absence.
+hosts:
+  - host: acl.gov
+    note: Drupal site; genuine 404s.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: agid.acl.gov
+    note: >-
+      Vite/React single-page app. Every path returns HTTP 200 with the same 458-byte
+      index.html shell (content-type text/html). Treated as a miss on every path.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/agent.json
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+  - host: eldercare.acl.gov
+    note: >-
+      Next.js single-page app with the same catch-all behaviour as agid.acl.gov.
+      Every /.well-known/* path returns 200 with the application HTML shell.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/api-catalog
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/agent.json
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        file: null
+        result: miss
+        body: html-spa-shell
+  - host: sic.acl.gov
+    note: >-
+      Azure API Management gateway fronting the AGID data functions. Genuine JSON
+      404s ({"statusCode":404,"message":"Resource not found"}).
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+  - host: ehc.acl.gov
+    note: >-
+      Strapi 5 headless CMS serving the Eldercare Locator content API. Genuine
+      Strapi JSON 404s.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+summary:
+  hosts_probed: 5
+  documents_served: 0
+  spa_false_positive_200s: 14
+  agent_card_found: false
+  security_txt_found: false
+  api_catalog_found: false
+maintainers:
+  - FN: Kin Lane
+    X-twitter: apievangelist
+    email: info@apievangelist.com

@@ -1,0 +1,105 @@
+specification: API Commons Error Catalog
+specificationVersion: '0.1'
+provider: Administration for Community Living (ACL)
+providerId: administration-for-community-living-acl-
+generated: '2026-08-30'
+method: probed
+source: >-
+  Live responses observed from https://sic.acl.gov/p-agid-ui-fn and
+  https://ehc.acl.gov/api on 2026-08-30. ACL publishes no error reference.
+format: none
+rfc9457: false
+description: >-
+  ACL publishes no error reference for either live API surface, so this catalog
+  is built from responses actually observed on the wire. The AGID gateway does
+  not use one envelope: validation errors come back as plain-English sentences,
+  gateway errors as Azure API Management JSON, and unhandled server errors as a
+  serialized Node stack trace. An agent cannot branch reliably on any single
+  field.
+envelope:
+  agid:
+    consistent: false
+    fields: []
+    note: Three different shapes across 400 / 401+404 / 500.
+  eldercare:
+    consistent: true
+    fields:
+      - data
+      - error.status
+      - error.name
+      - error.message
+      - error.details
+    note: Standard Strapi 5 error envelope.
+problem_types:
+  - status: 400
+    surface: https://sic.acl.gov/p-agid-ui-fn
+    operations:
+      - GetGeoGroups
+      - GetCategoryType
+    title: Missing required request-body parameter
+    format: text/plain sentence
+    observed:
+      - 'Please pass an dataset in the query string or in the request body'
+      - 'Please pass an dataset and category  in the query string or in the request body'
+    machine_readable: false
+    remediation: >-
+      Supply the named parameter in the JSON request body. The parameter names
+      are not documented anywhere; they must be read from the AGID front-end
+      bundle.
+  - status: 401
+    surface: https://sic.acl.gov/p-agid-ui-fn
+    title: Missing or invalid Azure APIM subscription key
+    format: application/json (Azure API Management)
+    fields:
+      - statusCode
+      - message
+    response_header: >-
+      www-authenticate: AzureApiManagementKey
+      realm="https://p-acl-apim.azure-api.net/p-agid-ui-fn",
+      name="Ocp-Apim-Subscription-Key", type="header"
+    machine_readable: true
+    remediation: Send the Ocp-Apim-Subscription-Key request header. ACL publishes no way to obtain one.
+  - status: 404
+    surface: https://sic.acl.gov/p-agid-ui-fn
+    title: Resource not found
+    format: application/json (Azure API Management)
+    observed: '{"statusCode": 404, "message": "Resource not found"}'
+    machine_readable: true
+    note: >-
+      Returned for any unknown path AND for a known operation called with the
+      wrong HTTP method — a GET to a valid POST-only operation returns 404 rather
+      than 405, so a client cannot distinguish "no such operation" from "wrong
+      verb".
+  - status: 500
+    surface: https://sic.acl.gov/p-agid-ui-fn
+    operations:
+      - getGeoGrantees
+    title: Unhandled upstream error, stack trace returned to the caller
+    format: application/json carrying a serialized AxiosError
+    machine_readable: false
+    finding: >-
+      The response body contains a Node.js stack trace with absolute server-side
+      file paths from the Azure Functions host. The underlying failure was an
+      upstream 400 that the function did not handle, surfaced to the caller as a
+      500. The trace itself is deliberately not reproduced in this repository.
+    remediation: >-
+      Provider-side. The upstream validation failure should be mapped to a 4xx
+      with a stable code, and the stack trace should not be returned to callers.
+  - status: 404
+    surface: https://ehc.acl.gov/api
+    title: Collection or entry not found
+    format: application/json (Strapi 5)
+    observed: '{"data":null,"error":{"status":404,"name":"NotFoundError","message":"Not Found","details":{}}}'
+    machine_readable: true
+    note: >-
+      Also returned for collections that exist but are not granted to the public
+      role, so 404 conflates "absent" with "not permitted".
+gaps:
+  - No documented error reference for any ACL API.
+  - No stable error codes; the only discriminator is the HTTP status.
+  - A 500 leaks a server-side stack trace.
+  - 404 is used for wrong-method and for unauthorized-collection.
+maintainers:
+  - FN: Kin Lane
+    X-twitter: apievangelist
+    email: info@apievangelist.com

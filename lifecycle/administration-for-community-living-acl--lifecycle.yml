@@ -1,0 +1,66 @@
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: Administration for Community Living (ACL)
+providerId: administration-for-community-living-acl-
+generated: '2026-08-30'
+method: searched
+source: https://agid.acl.gov/release-notes
+description: >-
+  Lifecycle posture for ACL's API surfaces. ACL runs a public Release Notes
+  channel for the AGID data portal and versions the application itself, but
+  publishes no versioning policy, no deprecation policy, no SLA and no status
+  page for any API. Both live API surfaces are undocumented, which means there is
+  no contract to deprecate and no notice channel an integrator could subscribe
+  to.
+versioning:
+  policy_published: false
+  transport_versioning: none
+  application_versioning:
+    scheme: 'Version <major>.<minor>'
+    example: 'Version 2.64'
+    surface: https://agid.acl.gov/release-notes
+    note: >-
+      The version numbers describe the AGID web application and its data loads,
+      not an API contract. The two API base URLs carry no version segment.
+  see: changelog/administration-for-community-living-acl--changelog.yml
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No deprecation policy, no Sunset or Deprecation response header observed, and
+    no notice channel. A prior generation of the AGID portal (the "AGing
+    Integrated Database") was retired and rebuilt as the current AGID Program
+    Data Portal; that migration was announced as agency news, not as an API
+    deprecation with a dated sunset.
+status_page:
+  present: false
+  url: null
+  probed:
+    - url: https://acl.gov/.well-known/api-catalog
+      status: 404
+  note: >-
+    No status page, uptime history or incident feed was found for acl.gov,
+    agid.acl.gov, sic.acl.gov or ehc.acl.gov. No StatusPage pointer is emitted.
+sla:
+  published: false
+  note: Federal agency public data portal; no service-level commitment is published.
+support:
+  channel: https://acl.gov/contact-us
+  type: web contact form
+  note: General agency contact. There is no developer support channel.
+maturity:
+  agid_program_data_api:
+    stage: undocumented-internal
+    note: >-
+      Live and load-bearing for ACL's own portal, but not published: no
+      reference, no key issuance, no terms of use for programmatic access.
+  eldercare_locator_content_api:
+    stage: undocumented-internal
+    note: Anonymous-readable Strapi endpoint backing eldercare.acl.gov.
+maintainers:
+  - FN: Kin Lane
+    X-twitter: apievangelist
+    email: info@apievangelist.com

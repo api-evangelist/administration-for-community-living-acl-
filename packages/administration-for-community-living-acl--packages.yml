@@ -1,0 +1,53 @@
+specification: API Commons Packages
+specificationVersion: '0.1'
+provider: Administration for Community Living (ACL)
+providerId: administration-for-community-living-acl-
+generated: '2026-08-30'
+method: searched
+source: >-
+  Registry searches on registry.npmjs.org and pypi.org, plus a GitHub org probe
+  (https://api.github.com/orgs/acl-gov -> 404) and a read of ACL's own web
+  properties for SDK or download links.
+description: >-
+  ACL publishes no client libraries. No first-party SDK, wrapper or CLI package
+  was found in any public registry, and ACL operates no GitHub organization under
+  a name resolvable from acl.gov. No SDKs pointer is emitted from this file.
+package_count: 0
+official_package_count: 0
+packages: []
+registries_searched:
+  - registry: npm
+    endpoint: https://registry.npmjs.org/-/v1/search
+    queries:
+      - acl.gov
+      - eldercare
+      - agid
+      - administration for community living
+    result: >-
+      No first-party package. The "agid" query returns packages belonging to
+      Agenzia per l'Italia Digitale (the Italian digital agency), a different
+      organization entirely, and they are rejected on that basis.
+  - registry: pypi
+    endpoint: https://pypi.org/pypi/<name>/json
+    queries:
+      - acl-gov
+      - agid
+    result: 404 on both; no first-party package.
+  - registry: github
+    endpoint: https://api.github.com/orgs/acl-gov
+    result: 404 — no ACL GitHub organization found.
+not_searched:
+  - Maven Central
+  - NuGet
+  - pkg.go.dev
+  - RubyGems
+  - Packagist
+  - crates.io
+not_searched_reason: >-
+  ACL ships no client-side developer program at all and no GitHub organization,
+  so there is no candidate package name to look up in the remaining registries.
+  Recorded as not checked rather than implied absent.
+maintainers:
+  - FN: Kin Lane
+    X-twitter: apievangelist
+    email: info@apievangelist.com

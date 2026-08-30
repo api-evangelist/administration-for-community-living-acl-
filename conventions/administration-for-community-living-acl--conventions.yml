@@ -1,0 +1,144 @@
+specification: API Commons Conventions
+specificationVersion: '0.1'
+provider: Administration for Community Living (ACL)
+providerId: administration-for-community-living-acl-
+generated: '2026-08-30'
+method: probed
+source: >-
+  Observed on the wire against https://sic.acl.gov/p-agid-ui-fn and
+  https://ehc.acl.gov/api, and read from the AGID front-end bundle
+  https://agid.acl.gov/assets/index-2c03a0f9.js. ACL publishes no API
+  conventions documentation of any kind.
+description: >-
+  Cross-cutting runtime semantics for the two live ACL API surfaces. Everything
+  here was measured, not documented: ACL does not publish a developer portal, an
+  API reference, or a conventions guide, so an integrator has no stated contract
+  to rely on. Recorded so an agent knows what it would actually meet.
+surfaces:
+  - name: AGID Program Data API
+    base: https://sic.acl.gov/p-agid-ui-fn
+    style: RPC over HTTP POST
+    transport: Azure API Management -> Azure Functions
+    operations_observed: 12
+    note: >-
+      Every operation is a POST to a verb-named path (/GetDataSets,
+      /GetTableData, ...) with a JSON body. There are no REST resources, no path
+      parameters and no HTTP verbs other than POST. Operation names were read
+      from the provider's own front-end bundle; four were exercised live.
+  - name: Eldercare Locator Content API
+    base: https://ehc.acl.gov/api
+    style: Strapi 5 REST
+    transport: Strapi headless CMS
+    note: >-
+      Standard Strapi 5 envelope ({"data": ..., "meta": {}}) with documentId,
+      createdAt, updatedAt, publishedAt and locale on every entity. Strapi's own
+      query conventions (populate, filters, pagination, locale) are therefore
+      available by construction, but ACL documents none of them.
+auth_style:
+  agid: Azure APIM subscription key in the Ocp-Apim-Subscription-Key request header
+  eldercare: anonymous
+  see: authentication/administration-for-community-living-acl--authentication.yml
+content_type:
+  request: application/json
+  response_agid: text/plain; charset=utf-8 (JSON body served under a text/plain content-type)
+  response_eldercare: application/json; charset=utf-8
+  note: >-
+    The AGID gateway returns valid JSON arrays under content-type
+    text/plain; charset=utf-8. A strict client that negotiates on content-type
+    will reject a response it can in fact parse.
+idempotency:
+  supported: na
+  reason: >-
+    Both surfaces are read-only. No write, create, update or delete operation was
+    found on either host, so there is no operation an idempotency key could
+    protect.
+  header: null
+  scope: null
+  retention: null
+reversibility:
+  state: na
+  reason: >-
+    Read-only. Neither ACL API exposes a write surface, so there is no action to
+    reverse. No cancel, refund, void, undo, rollback or restore operation exists,
+    and none is needed.
+  operations: []
+  window: null
+dry_run_mode:
+  supported: na
+  reason: Read-only; nothing to rehearse.
+pagination:
+  style: none-observed
+  params: []
+  response_fields: []
+  note: >-
+    The AGID operations exercised (GetDataSets, GetYearInfo, GetCategoryType,
+    GetGeoGroups) return whole JSON arrays with no envelope, no cursor and no
+    total. GetTableData was not exercised with a real dataset payload, so whether
+    large result sets are chunked is unverified. Strapi 5 on ehc.acl.gov supports
+    its native pagination[page]/pagination[pageSize] parameters, but ACL does not
+    document them.
+field_expansion:
+  supported: partial
+  note: >-
+    Strapi's pLevel/populate expansion is used by ACL's own Eldercare front end
+    (it calls /api/eldercareglobal?pLevel). Not documented by ACL.
+metadata:
+  supported: false
+request_id_tracing:
+  supported: partial
+  headers:
+    - name: x-azure-ref
+      surface: sic.acl.gov
+      note: >-
+        Azure Front Door correlation id returned on every AGID response. Useful
+        as a support reference, though ACL publishes no channel that accepts it.
+    - name: request-context
+      surface: sic.acl.gov
+      note: Application Insights appId, returned on every AGID response.
+versioning:
+  scheme: none-in-transport
+  note: >-
+    Neither base URL carries a version segment and no version header was
+    observed. The AGID application itself is versioned in its Release Notes
+    ("Version 2.64"), but that version describes the web application and its
+    data loads, not the API contract. See
+    changelog/administration-for-community-living-acl--changelog.yml.
+error_envelope:
+  consistent: false
+  shapes:
+    - status: 400
+      surface: sic.acl.gov
+      shape: plain text sentence
+      example: 'Please pass an dataset in the query string or in the request body'
+    - status: 401
+      surface: sic.acl.gov
+      shape: Azure APIM JSON ({"statusCode":401,"message":...}) plus a www-authenticate header
+    - status: 404
+      surface: sic.acl.gov
+      shape: 'Azure APIM JSON: {"statusCode":404,"message":"Resource not found"}'
+    - status: 500
+      surface: sic.acl.gov
+      shape: >-
+        JSON object carrying an unhandled Node/axios stack trace, including
+        absolute server-side file paths. This leaks implementation detail and is
+        not a stable machine-readable error contract.
+    - status: 404
+      surface: ehc.acl.gov
+      shape: 'Strapi JSON: {"data":null,"error":{"status":404,"name":"NotFoundError",...}}'
+  rfc9457: false
+  see: errors/administration-for-community-living-acl--problem-types.yml
+rate_limit_signaling:
+  headers_returned: []
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was returned on any
+    observed response, and no limit is published. See
+    rate-limits/administration-for-community-living-acl--rate-limits.yml.
+cross_links:
+  errors: errors/administration-for-community-living-acl--problem-types.yml
+  lifecycle: lifecycle/administration-for-community-living-acl--lifecycle.yml
+  authentication: authentication/administration-for-community-living-acl--authentication.yml
+  rate_limits: rate-limits/administration-for-community-living-acl--rate-limits.yml
+maintainers:
+  - FN: Kin Lane
+    X-twitter: apievangelist
+    email: info@apievangelist.com

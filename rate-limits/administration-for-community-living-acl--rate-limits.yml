@@ -4,91 +4,52 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Administration for Community Living (ACL)
 providerId: administration-for-community-living-acl-
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
+modified: '2026-08-30'
+generated: '2026-08-30'
+method: probed
+source: >-
+  Response headers observed on live calls to https://sic.acl.gov/p-agid-ui-fn and
+  https://ehc.acl.gov/api on 2026-08-30, plus a search of acl.gov, agid.acl.gov
+  and eldercare.acl.gov for any published limit.
 tags:
   - Aging
   - Federal Government
-  - Healthcare
-  - Disability
-  - Independent Living
   - Open Data
-  - Social Services
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Administration for Community Living (ACL)
-  API surface. Captures per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults
-  are scaffold values to be replaced with published provider limits.
+description: >-
+  ACL publishes no rate limits for either live API surface, and no rate-limit
+  signalling header was returned on any observed response. limit_count is an
+  honest zero: nothing is documented and nothing is advertised at runtime, so a
+  client has no way to pace itself except by backing off on failure.
+limit_count: 0
+limits: []
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+headers_observed: []
+headers_observed_note: >-
+  Full response headers were captured from POST
+  https://sic.acl.gov/p-agid-ui-fn/GetDataSets. The only non-standard headers
+  returned were request-context (Application Insights appId), x-azure-ref (Azure
+  Front Door correlation id) and x-cache. No X-RateLimit-*, RateLimit-* or
+  Retry-After header was present.
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - AGID Program Data Portal
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - AGID Program Data Portal
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - AGID Program Data Portal
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - AGID Program Data Portal
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - AGID Program Data Portal
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  throttled: null
+  quotaExceeded: null
+  note: >-
+    No 429 was observed and none is documented. The AGID gateway is Azure API
+    Management, which supports rate-limit policies, but whether one is configured
+    could not be determined without deliberately exhausting it — which was not
+    attempted against a public federal service.
+policies: []
+note: >-
+  This file previously carried a bulk-sweep scaffold (free / professional /
+  enterprise tiers with invented per-minute and per-month quotas and a full set of
+  X-RateLimit-* headers). None of it was published or served by ACL. It was
+  replaced on 2026-08-30 with this measured record.
 maintainers:
   - FN: Kin Lane
     X-twitter: apievangelist

@@ -1,0 +1,87 @@
+specification: API Commons MCP
+specificationVersion: '0.1'
+provider: Administration for Community Living (ACL)
+providerId: administration-for-community-living-acl-
+generated: '2026-08-30'
+method: derived
+source: >-
+  Operation names read from ACL's own AGID front-end bundle
+  https://agid.acl.gov/assets/index-2c03a0f9.js and confirmed live against
+  https://sic.acl.gov/p-agid-ui-fn on 2026-08-30.
+status: candidate
+description: >-
+  ACL ships no MCP server, hosted or local. This file records that absence and
+  sketches the tool surface an MCP server over the AGID Program Data API would
+  expose, derived from operations that were read from the provider's own
+  front-end and exercised live. It is a candidate only. No MCPServer pointer is
+  emitted in apis.yml, because emitting one would assert an agent surface ACL
+  does not serve.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  auth_note: >-
+    Any server built over this API would have to carry an Azure APIM
+    subscription key, and ACL publishes no way for a third party to obtain one.
+  verified: probed
+search:
+  performed: true
+  findings: >-
+    No hosted MCP endpoint, no npx/pip package, and no mention of MCP or the
+    Model Context Protocol on any ACL property. /.well-known/ai-plugin.json
+    returned 404 on acl.gov, sic.acl.gov and ehc.acl.gov, and the HTML shell on
+    agid.acl.gov and eldercare.acl.gov.
+candidate_tools:
+  - name: list_datasets
+    rest: POST /GetDataSets
+    description: List the AGID dataset families (Title III, Title VI, Title VII, and related program datasets).
+    verified_live: true
+  - name: list_years
+    rest: POST /GetYearInfo
+    description: List reporting years available for a dataset.
+    verified_live: true
+  - name: get_table_data
+    rest: POST /GetTableData
+    description: Retrieve a custom table of program data for a dataset, year, geography and category selection.
+    verified_live: false
+  - name: list_category_types
+    rest: POST /GetCategoryType
+    description: List category types available for a dataset. Requires dataset and category in the body.
+    verified_live: true
+  - name: list_category_subtypes
+    rest: POST /GetCategorySubType
+    verified_live: false
+  - name: list_categories_by_dataset
+    rest: POST /GetCategoryByDataset
+    verified_live: false
+  - name: list_category_demo_groups
+    rest: POST /GetCategoryDemoGroups
+    verified_live: false
+  - name: list_data_elements
+    rest: POST /GetDataElements
+    verified_live: false
+  - name: list_geo_groups
+    rest: POST /GetGeoGroups
+    description: List geography groupings for a dataset. Requires dataset in the body.
+    verified_live: true
+  - name: list_geo_subgroups
+    rest: POST /GetGeoSubGroups
+    verified_live: false
+  - name: list_geo_tribes
+    rest: POST /GetGeoTribes
+    verified_live: false
+  - name: list_geo_grantees
+    rest: POST /getGeoGrantees
+    verified_live: true
+    note: Returned HTTP 500 with an unhandled stack trace when called with only the environment parameter.
+candidate_tools_note: >-
+  Input schemas are NOT recorded. ACL publishes no parameter documentation and no
+  machine-readable contract, so beyond the environment parameter and the two
+  parameter names the 400 responses name (dataset, category) the request shapes
+  are unknown. They are deliberately left blank rather than guessed.
+maintainers:
+  - FN: Kin Lane
+    X-twitter: apievangelist
+    email: info@apievangelist.com
