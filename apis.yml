@@ -31,7 +31,7 @@ modified: '2026-08-30'
 specificationVersion: '0.23'
 tags:
   - Aging
-  - Federal-Government
+  - Federal Government
   - Healthcare
   - Disability
   - Independent Living
@@ -45,6 +45,7 @@ tags_raw:
   - Independent Living
   - Open Data
   - Social Services
+  - Federal-Government
 description: >-
   The Administration for Community Living (ACL) is part of the United States
   Department of Health and Human Services. ACL works to maximize the
