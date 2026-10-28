@@ -1,4 +1,4 @@
-# Administration for Community Living (ACL) (administration-for-community-living-acl-)
+# Administration for Community Living (ACL)
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,67 +66,113 @@
 
 The Administration for Community Living (ACL) is part of the United States Department of Health and Human Services. ACL works to maximize the independence, well-being, and health of older adults, people with disabilities across the lifespan, and their families and caregivers. The agency administers the Older Americans Act programs, supports disability services through centers for independent living, and maintains the AGing, Independence, and Disability (AGID) Program Data Portal providing publicly accessible datasets on aging and disability programs. ACL also operates the National Institute on Disability, Independent Living and Rehabilitation Research (NIDILRR).
 
-**URL:** [https://acl.gov/](https://acl.gov/)
+**Areas:** Aging · Federal Government · Healthcare · Disability · Independent Living · Open Data · Social Services
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Administration for Community Living (ACL) on APIs.io
 
-## Tags:
+Everything profiled for Administration for Community Living (ACL) is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/administration-for-community-living-acl-/](https://apis.io/providers/administration-for-community-living-acl-/)** — or go straight to one of the APIs or properties below.
 
- - Aging, Federal Government, Healthcare, Disability, Independent Living, Open Data, Social Services
+### APIs (2)
 
-## Timestamps
+- [AGID Program Data Portal](https://apis.io/apis/administration-for-community-living-acl-/agid-data-portal/) — The AGing, Independence, and Disability (AGID) Program Data Portal provides publicly accessible data from programs funded under the Older Americans Act and…
+- [Eldercare Locator Content API](https://apis.io/apis/administration-for-community-living-acl-/eldercare-locator-content-api/) — The Strapi 5 headless-CMS REST API behind eldercare.acl.gov, the national Eldercare Locator service ACL operates to connect older adults and caregivers to…
 
-- **Created:** 2024-11-20
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### AGID Program Data Portal
-The AGing, Independence, and Disability (AGID) Program Data Portal provides publicly accessible data from programs funded under the Older Americans Act and related disability programs. Datasets include the American Community Survey Special Tabulation on Aging and Disability, National Survey of Older Americans Act Participants (NSOAAP), National Ombudsman Reporting System (NORS), National Adult Maltreatment Reporting System (NAMRS), Independent Living Services (ILS) and Centers for Independent Living (CIL) performance data, and I/DD (Intellectual and Developmental Disabilities) Longitudinal Data. Data files are available for download in CSV and Excel formats.
+#### MCP servers (1)
 
-**Human URL:** [https://agid.acl.gov/](https://agid.acl.gov/)
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags:
+- [administration-for-community-living-acl--mcp.yml](https://apis.io/servers/administration-for-community-living-acl-/administration-for-community-living-acl--mcp-yml/)
 
- - Aging, Disability, Open Data, Older Americans Act, Independent Living
+#### Security (3)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://agid.acl.gov/)
-- [DataAPI](https://agid.acl.gov/DataFiles/)
+- [Administration For Community Living Acl  Authentication](https://apis.io/security/administration-for-community-living-acl-/administration-for-community-living-acl--authentication/)
+- [Administration For Community Living Acl  Domain Security](https://apis.io/security/administration-for-community-living-acl-/administration-for-community-living-acl--domain-security/)
+- [Administration For Community Living Acl  Vulnerability Disclosure](https://apis.io/security/administration-for-community-living-acl-/administration-for-community-living-acl--vulnerability-disclosure/)
 
-## Common Properties
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Administration For Community Living Acl  Plans Pricing](https://apis.io/plans/administration-for-community-living-acl-/administration-for-community-living-acl--plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Administration For Community Living Acl  Rate Limits](https://apis.io/rate-limits/administration-for-community-living-acl-/administration-for-community-living-acl--rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Administration For Community Living Acl  Finops](https://apis.io/finops/administration-for-community-living-acl-/administration-for-community-living-acl--finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://acl.gov/)
-- [Portal](https://agid.acl.gov/)
-- [DataAPI](https://agid.acl.gov/DataFiles/)
-- [Resources](https://acl.gov/aging-and-disability-in-america/data-and-research)
-- [Contact](https://acl.gov/about-acl/contact-us)
+- [Support](https://acl.gov/contact-us)
+- [Blog](https://acl.gov/news-and-events/acl-blog)
+- [Security](https://www.hhs.gov/vulnerability-disclosure-policy/index.html)
+- [Terms of service](https://acl.gov/disclaimer)
+- [Privacy policy](https://acl.gov/privacy)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Older Americans Act Program Data | Data from programs funded under the Older Americans Act including nutrition services, caregiver support, elder rights, and home and community-based supportive services. |
-| National Ombudsman Reporting System (NORS) | Annual data from the Long-Term Care Ombudsman Program, covering complaints, facilities visited, and resident outcomes in nursing homes and assisted living facilities. |
-| National Adult Maltreatment Reporting System (NAMRS) | Standardized data from state Adult Protective Services programs on reports of abuse, neglect, and exploitation of adults. |
-| Independent Living Program Data | Annual performance data from states and territories administering Independent Living Services and Centers for Independent Living (CIL) programs under the Rehabilitation Act. |
-| I/DD Longitudinal Data | Longitudinal data tracking intellectual and developmental disability services across three areas: revenue and spending, residential supports, and employment services. |
-| American Community Survey Disability Data | Special tabulations from the U.S. Census Bureau American Community Survey providing demographic and household data for older adults and people with disabilities. |
-| FOIA Request Services | Freedom of Information Act (FOIA) services enabling public access to ACL agency records not otherwise publicly available. |
+**Kin Score 24.4** — emerging · rubric 0.24.0 · scored 2026-10-17
 
-## Use Cases
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 38.1 |
+| Access clarity | 21.1 |
 
-| Name | Description |
-|------|-------------|
-| Aging Services Research And Planning | Researchers and state agencies can access AGID data to analyze trends in aging services utilization, outcomes, and demographics to inform program planning. |
-| Long-Term Care Ombudsman Analysis | Policy researchers can use NORS data to analyze complaint trends, facility quality indicators, and resident outcomes in long-term care settings. |
-| Adult Protective Services Benchmarking | State APS programs and advocates can use NAMRS data to benchmark reporting, investigation, and service delivery across states. |
-| Disability Employment And Housing Research | Researchers can analyze I/DD longitudinal data to track trends in employment, residential services, and community integration for people with intellectual and developmental disabilities. |
-| Community Living Policy Development | Federal and state policymakers can use ACL data to evaluate the impact of community living initiatives and identify gaps in service delivery. |
+**Agent readiness 7.9** — agent-aware
 
-## Maintainers
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-**FN:** Kin Lane
+**Regulatory alignment 30.4** — Government & Public Sector
 
-**Email:** info@apievangelist.com
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/administration-for-community-living-acl-/](https://apis.io/providers/administration-for-community-living-acl-/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Administration for Community Living (ACL): the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/administration-for-community-living-acl-/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
